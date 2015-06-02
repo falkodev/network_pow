@@ -1,0 +1,32 @@
+application:
+    build: docker/code
+    volumes:
+        - .:/var/www/bejoe
+    tty: true
+
+db:
+    image: tpires/neo4j
+    ports:
+        - 7474:7474
+    cap_add:
+        - SYS_RESOURCE
+
+php:
+    build: docker/php-fpm
+    expose:
+        - 9000:9000
+    volumes_from:
+        - application
+    links:
+        - db
+
+nginx:
+    build: docker/php-fpm
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - application
+    volumes:
+        - logs/nginx/:/var/log/nginx
