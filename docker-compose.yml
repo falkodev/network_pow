@@ -2,14 +2,17 @@ application:
     build: docker/code
     volumes:
         - .:/var/www/bejoe
-    tty: true
 
 db:
-    image: tpires/neo4j
+    image: ahmetkizilay/docker-neo4j-auth
     ports:
         - 7474:7474
     cap_add:
         - SYS_RESOURCE
+    volumes:
+        - data/neo4j/:/var/lib/neo4j/data
+    environment:
+        - NEO4J_AUTH=neo4j:B3J03
 
 php:
     build: docker/php-fpm
@@ -21,7 +24,7 @@ php:
         - db
 
 nginx:
-    build: docker/php-fpm
+    build: docker/nginx
     ports:
         - 80:80
     links:
@@ -29,4 +32,4 @@ nginx:
     volumes_from:
         - application
     volumes:
-        - logs/nginx/:/var/log/nginx
+        - app/logs/nginx/:/var/log/nginx

@@ -5,21 +5,18 @@ BeJoe est un réseau social mettant en avant la recommandation entre amis
  
 ## Initialisation
 
-    S'inspirer de https://github.com/sskorc/docker-symfony
-
 Le projet utilise une stack technique s'appuyant sur des containers [Docker](https://www.docker.com/), 
 orchestrés avec [Docker Compose](https://docs.docker.com/compose/).
+
+_Pour Mac OS, il est nécessaire d'installer [Boot2Docker](http://boot2docker.io/) et [https://github.com/brikis98/docker-osx-dev]()_
 
 ### Lancement des containers
  
 ```
-$ docker-compose up
+$ docker-compose up -d
 ```
-
 _(le premier lancement peut être long à cause du téléchargement des images des containers)_
  
-Définir un mot de passe pour neo4j
-
 ## Tests
 
 

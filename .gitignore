@@ -41,6 +41,8 @@
 # Composer PHAR
 /composer.phar
 
+### Neo4j data storage
+/data/neo4j/*
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
