@@ -1,5 +1,11 @@
-# ==== FORM =====
-app.form.register:
-    class: AppBundle\Form\Type\RegisterFormType
-    tags:
-        - { name: form.type, alias: app_user_register }
+services:
+    # ==== FORM =====
+    app.form.register:
+        class: AppBundle\Form\Type\RegisterFormType
+        tags:
+            - { name: form.type, alias: app_user_register }
+
+    app.form.profil:
+        class: AppBundle\Form\Type\ProfilFormType
+        tags:
+            - { name: form.type, alias: app_user_profil }
