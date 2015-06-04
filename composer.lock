@@ -708,12 +708,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jadell/neo4jphp.git",
-                "reference": "7177378233d9811a382947ee927cdf1075a36828"
+                "reference": "72b0911cc09eecf85ff712a5e78d5345bc8e2c5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jadell/neo4jphp/zipball/7177378233d9811a382947ee927cdf1075a36828",
-                "reference": "7177378233d9811a382947ee927cdf1075a36828",
+                "url": "https://api.github.com/repos/jadell/neo4jphp/zipball/72b0911cc09eecf85ff712a5e78d5345bc8e2c5e",
+                "reference": "72b0911cc09eecf85ff712a5e78d5345bc8e2c5e",
                 "shasum": ""
             },
             "require": {
@@ -749,7 +749,7 @@
                 "graph",
                 "neo4j"
             ],
-            "time": "2015-05-25 23:37:21"
+            "time": "2015-06-01 15:56:37"
         },
         {
             "name": "hirevoice/neo4jphp-ogm",
@@ -803,17 +803,16 @@
         },
         {
             "name": "incenteev/composer-parameter-handler",
-            "version": "v2.1.0",
-            "target-dir": "Incenteev/ParameterHandler",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "143272a0a09c62616a3c8011fc165a10c6b35241"
+                "reference": "84a205fe80a46101607bafbc423019527893ddd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/143272a0a09c62616a3c8011fc165a10c6b35241",
-                "reference": "143272a0a09c62616a3c8011fc165a10c6b35241",
+                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/84a205fe80a46101607bafbc423019527893ddd0",
+                "reference": "84a205fe80a46101607bafbc423019527893ddd0",
                 "shasum": ""
             },
             "require": {
@@ -832,8 +831,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Incenteev\\ParameterHandler": ""
+                "psr-4": {
+                    "Incenteev\\ParameterHandler\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -851,7 +850,7 @@
             "keywords": [
                 "parameters management"
             ],
-            "time": "2013-12-07 10:10:39"
+            "time": "2015-06-03 08:27:03"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1090,17 +1089,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.26",
+            "version": "v3.0.28",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "e971317e2e4f9f94d1f972948e612e45e64d708f"
+                "reference": "8175618b07793b9d43c3be931f3d8d4c14c9e866"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/e971317e2e4f9f94d1f972948e612e45e64d708f",
-                "reference": "e971317e2e4f9f94d1f972948e612e45e64d708f",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/8175618b07793b9d43c3be931f3d8d4c14c9e866",
+                "reference": "8175618b07793b9d43c3be931f3d8d4c14c9e866",
                 "shasum": ""
             },
             "require": {
@@ -1146,7 +1145,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2015-06-01 01:47:05"
+            "time": "2015-06-01 15:04:20"
         },
         {
             "name": "sensio/framework-extra-bundle",

@@ -2,12 +2,25 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Be Joe{% endblock %}</title>
+        {% block css %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'user') }}
+            <a href="{{ path('security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'user') }}
+            </a>
+        {% else %}
+            <a href="{{ path('security_login') }}">{{ 'layout.login'|trans({}, 'user') }}</a>
+            <a href="{{ path('app_user_register') }}">{{ 'layout.register'|trans({}, 'user') }}</a>
+        {% endif %}
+        <br/>
+        {% block body %}
+
+        {% endblock %}
+
+        {% block js %}{% endblock %}
     </body>
 </html>

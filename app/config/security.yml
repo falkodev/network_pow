@@ -1,12 +1,38 @@
 security:
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    encoders:
+        AppBundle\Entity\User: sha512
+
     providers:
-        in_memory:
-            memory: ~
+        neo4j:
+            id: security.provider.neo4juser
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
-        default:
+        main:
             anonymous: ~
+            provider: neo4j
+            form_login:
+                login_path: security_login
+                check_path: security_login_check
+            logout:
+                path:   security_logout
+                target: app_homepage
+            remember_me:
+                key:      "%secret%"
+                lifetime: 2592000 # 30j
+                path:     /
+                domain:   ~
+
+    access_control:
+        - { path: ^/profil, role: ROLE_USER }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

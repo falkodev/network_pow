@@ -1,0 +1,49 @@
+parameters:
+    neo4j_proxy_dir: '%kernel.cache_dir%/doctrine/neo4j/Proxies'
+
+services:
+    # ==== MANAGER ==== #
+    app.manager.graph:
+        class: AppBundle\Manager\GraphManager
+        arguments:
+            - %neo4j_host%
+            - %neo4j_port%
+            - %neo4j_proxy_dir%
+            - %neo4j_username%
+            - %neo4j_password%
+            - %kernel.debug%
+
+    app.manager.user:
+        class: AppBundle\Manager\UserManager
+        arguments:
+            - @security.encoder_factory
+            - @app.manager.graph
+            - AppBundle\Entity\User
+#
+
+     # ===== SECURITY ==== #
+    security.provider.neo4juser:
+        class: AppBundle\Security\Neo4jUserProvider
+        arguments: [@app.manager.user]
+
+#
+#    security.authentication.provider.neo4j:
+#        abstract: true
+#        public: false
+#        class: AppBundle\Security\Authentication\Provider\Neo4jAuthenticationProvider
+#        arguments:
+#            - ''
+#            - @security.user_checker
+#            - ''
+#            - @security.encoder_factory
+#            - %security.authentication.hide_user_not_found%
+#
+#    security.authentication.listener.neo4j:
+#        class:  AppBundle\Security\Http\Firewall\Neo4jAuthenticationListener
+#        arguments: [@security.token_storage, @security.authentication.manager, 'main']
+
+    # ==== FORM =====
+    app.form.register:
+        class: AppBundle\Form\Type\RegisterFormType
+        tags:
+            - { name: form.type, alias: app_user_register }
