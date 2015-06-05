@@ -99,6 +99,8 @@ class UserManager extends BaseManager
         if ($andFlush) {
             $this->graphManager->flush();
         }
+
+        return $user;
     }
 
     /**
@@ -109,6 +111,22 @@ class UserManager extends BaseManager
     public function updateUserAndEncodePassword(UserInterface $user)
     {
         return $this->updateUser($user, true, true);
+    }
+
+    /**
+     * Updates info about last connection
+     *
+     * @param User $user
+     * @param null $lastIp
+     */
+    public function updateLastConnection(User $user, $lastIp = null, $saveUser = true)
+    {
+        $user->setLastLogin(new \DateTime());
+        $user->setLastConnectedIp($lastIp);
+
+        if ($saveUser) {
+            $this->updateUser($user);
+        }
     }
 
     /**
