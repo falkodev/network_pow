@@ -1,0 +1,10 @@
+{% trans_default_domain 'user' %}
+
+<h2>{{ 'email.hello'|trans({'%username%': user.fullname}) }}</h2>
+
+<p>{{ 'form.mail.message'|trans({'%confirmationUrl%': confirmationUrl}) }}</p>
+<br/>
+
+<p>
+    {{ 'email.footer'|trans }}
+</p>
