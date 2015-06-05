@@ -1,0 +1,7 @@
+{% extends "::base.html.twig" %}
+
+{% trans_default_domain 'user' %}
+
+{% block body %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': app.user.firstname}) }}</p>
+{% endblock body %}
