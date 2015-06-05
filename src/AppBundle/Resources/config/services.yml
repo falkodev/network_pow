@@ -2,7 +2,13 @@ parameters:
     neo4j_proxy_dir: '%kernel.cache_dir%/doctrine/neo4j/Proxies'
 
 services:
-    # ==== MANAGER ==== #
+    # ===== MANAGER =====
+    app.manager.base:
+        abstract: true
+        class: AppBundle\Manager\BaseManager
+        calls:
+            - [setEntityManager, ["@app.manager.graph"]]
+
     app.manager.graph:
         class: AppBundle\Manager\GraphManager
         arguments:
@@ -15,13 +21,33 @@ services:
 
     app.manager.user:
         class: AppBundle\Manager\UserManager
+        parent: app.manager.base
         arguments:
             - @security.encoder_factory
-            - @app.manager.graph
-            - AppBundle\Entity\User
-#
+        calls:
+            - [setEntityClassName,  ["AppBundle\Entity\User"]]
 
-     # ===== SECURITY ==== #
+    # ===== SERVICE =====
+    app.service.mailer:
+        class: AppBundle\Service\MailerService
+        arguments:
+            - @mailer
+            - @router
+            - @templating
+            - @translator
+            - %mailer%
+
+    # ===== LISTENER =====
+    app.listener.email_confirmation:
+        class: AppBundle\Listener\EmailConfirmationListener
+        arguments:
+            - @app.service.mailer
+            - @app.manager.user
+            - @app.helper.token_generator
+        tags:
+            - { name: kernel.event_subscriber }
+
+    # ===== SECURITY =====
     security.provider.neo4juser:
         class: AppBundle\Security\Neo4jUserProvider
         arguments: [@app.manager.user]
@@ -32,3 +58,8 @@ services:
             - @security.http_utils
             - @security.authorization_checker
             - @app.manager.user
+
+    # ===== HELPER =====
+    app.helper.token_generator:
+        class: AppBundle\Helper\TokenGenerator
+        arguments: [@logger]

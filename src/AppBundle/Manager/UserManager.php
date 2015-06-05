@@ -11,18 +11,9 @@ class UserManager extends BaseManager
 {
     private $encoder;
 
-    private $graphManager;
-
-    private $repository;
-
-    private $userEntityClass;
-
-    public function __construct(EncoderFactoryInterface $encoderFactory, GraphManager $graphManager, $userEntityClass)
+    public function __construct(EncoderFactoryInterface $encoderFactory)
     {
-        $this->encoder         = $encoderFactory;
-        $this->graphManager    = $graphManager;
-        $this->repository      = $graphManager->getRepository($userEntityClass);
-        $this->userEntityClass = $userEntityClass;
+        $this->encoder = $encoderFactory;
     }
 
     /**
@@ -34,7 +25,7 @@ class UserManager extends BaseManager
     {
         $salt = $this->generateSalt();
 
-        return new $this->userEntityClass($salt);
+        return new $this->entityClass($salt);
     }
 
     /**
@@ -95,9 +86,9 @@ class UserManager extends BaseManager
             $this->updatePassword($user);
         }
 
-        $this->graphManager->persist($user);
+        $this->em->persist($user);
         if ($andFlush) {
-            $this->graphManager->flush();
+            $this->em->flush();
         }
 
         return $user;
@@ -136,7 +127,7 @@ class UserManager extends BaseManager
      */
     public function getEntityClass()
     {
-        return $this->userEntityClass;
+        return $this->entityClass;
     }
 
     /**
