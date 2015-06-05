@@ -21,10 +21,18 @@
         {% endif %}
         <br/>
 
-        {% for key, flash in app.session.flashbag.all %}
-            <div class="alert {{ key }}">
-                {{ flash }}
-            </div>
+        {% for key, flashs in app.session.flashbag.all %}
+            {% if flashs is iterable %}
+                {% for flash in flashs %}
+                    <div class="alert {{ key }}">
+                        {{ flash }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert {{ key }}">
+                    {{ flashs }}
+                </div>
+            {% endif %}
         {% endfor %}
 
         {% block body %}
