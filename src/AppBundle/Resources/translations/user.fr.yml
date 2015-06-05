@@ -22,8 +22,21 @@ form:
     password_confirmation: Confirmation
     submit: Valider
     address: Addresse
-    confirm_register: Votre compte a bien été crée
     confirm_update: Votre profil a bien été mis à jour
+    mail:
+        subject: Bienvenue sur BeJoe !
+        message: Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
+
+registration:
+    flash:
+        confirm_register: Votre compte a bien été, pour continuer, valider votre compte via l'email de confirmation
+    confirmed: Félicitations %username%, votre compte est maintenant activé.
+
+email:
+    hello: Bonjour %username% !
+    footer: |
+            Cordialement,
+            L'équipe.
 
 profil:
     submit: Mettre à jour
