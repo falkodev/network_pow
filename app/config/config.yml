@@ -3,11 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: fr
-
 framework:
     #esi:             ~
     translator:      ~
@@ -78,3 +73,16 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# Parameters
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+   locale: fr
+
+   mailer:
+      from_email:
+          contact@bejoe.fr: Be Joe
+      confirmation:
+          template: user/confirm.mail.html.twig
+          subject: form.mail.subject
