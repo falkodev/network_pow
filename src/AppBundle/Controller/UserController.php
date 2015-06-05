@@ -6,6 +6,7 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends Controller
@@ -17,6 +18,7 @@ class UserController extends Controller
     {
         $userManager = $this->get('app.manager.user');
         $user        = $this->getUser();
+        $oldPassword = $user->getPassword();
 
         $form        = $this->createForm('app_user_profil', $user);
 
@@ -27,8 +29,6 @@ class UserController extends Controller
 
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $oldPassword = $user->getPassword();
-
             /** @var UserInterface $datas */
             $datas = $form->getData();
 
@@ -66,11 +66,16 @@ class UserController extends Controller
 
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $userManager->updateLastConnection($user, $request->getClientIp(), false);
             $userManager->updateUserAndEncodePassword($user);
 
             $this->addFlash('notice', $this->get('translator')->trans('form.confirm_register', [], 'user'));
 
-            return $this->redirectToRoute('security_login');
+            // Loggin user
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+
+            return $this->redirectToRoute('app_homepage');
         }
 
         return $this->render('user/register.html.twig', [
