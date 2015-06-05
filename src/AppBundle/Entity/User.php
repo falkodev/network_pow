@@ -15,6 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, EquatableInterface
 {
+    const STATUS_ENABLED  = 1;
+    const STATUS_AWAITING = 0;
+    const STATUS_BLOCKED  = -1;
+    const STATUS_DISABLED = -2;
+
     /**
      * @OGM\Auto
      */
@@ -57,7 +62,7 @@ class User implements UserInterface, EquatableInterface
     /**
      * @OGM\Property
      */
-    protected $enabled;
+    protected $status;
 
     /**
      * @OGM\Property
@@ -122,12 +127,12 @@ class User implements UserInterface, EquatableInterface
      * @param string|null $salt
      * @param array|null $roles
      */
-    public function __construct($salt = null)
+    public function __construct($salt = null, $status = self::STATUS_AWAITING)
     {
         $this->roles           = array('ROLE_USER');
-        $this->enabled         = false;
         $this->locked          = false;
         $this->expired         = false;
+        $this->status          = $status;
         $this->salt            = $salt;
     }
 
@@ -211,6 +216,11 @@ class User implements UserInterface, EquatableInterface
         return $this;
     }
 
+    public function getFullname()
+    {
+        return strtoupper($this->lastname). ' '. ucfirst($this->firstname);
+    }
+
     /**
      * @return mixed
      */
@@ -227,26 +237,6 @@ class User implements UserInterface, EquatableInterface
     public function setAddress($address)
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * @param mixed $enabled
-     *
-     * @return User
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
 
         return $this;
     }
@@ -307,6 +297,26 @@ class User implements UserInterface, EquatableInterface
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     *
+     * @return User
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }
