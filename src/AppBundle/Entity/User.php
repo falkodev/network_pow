@@ -76,9 +76,14 @@ class User implements UserInterface, EquatableInterface
     protected $password;
 
     /**
-     * @OGM\Property
+     * @OGM\Property(format="date")
      */
     protected $lastLogin;
+
+    /**
+     * @OGM\Property
+     */
+    protected $lastconnectedIp;
 
     /**
      * @OGM\Property
@@ -119,11 +124,11 @@ class User implements UserInterface, EquatableInterface
      */
     public function __construct($salt = null)
     {
-        $this->roles    = array('ROLE_USER');
-        $this->enabled  = false;
-        $this->locked   = false;
-        $this->expired  = false;
-        $this->salt     = $salt;
+        $this->roles           = array('ROLE_USER');
+        $this->enabled         = false;
+        $this->locked          = false;
+        $this->expired         = false;
+        $this->salt            = $salt;
     }
 
     /**
@@ -262,6 +267,26 @@ class User implements UserInterface, EquatableInterface
     public function setLastLogin($lastLogin)
     {
         $this->lastLogin = $lastLogin;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastconnectedIp()
+    {
+        return $this->lastconnectedIp;
+    }
+
+    /**
+     * @param mixed $lastconnectedIp
+     *
+     * @return User
+     */
+    public function setLastconnectedIp($lastconnectedIp)
+    {
+        $this->lastconnectedIp = $lastconnectedIp;
 
         return $this;
     }
@@ -443,6 +468,7 @@ class User implements UserInterface, EquatableInterface
         if ($this->email !== $user->getEmail()) {
             return false;
         }
+
         return true;
     }
 

@@ -21,6 +21,7 @@ security:
             form_login:
                 login_path: security_login
                 check_path: security_login_check
+                success_handler: security.handler.loggin
             logout:
                 path:   security_logout
                 target: app_homepage

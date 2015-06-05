@@ -25,3 +25,10 @@ services:
     security.provider.neo4juser:
         class: AppBundle\Security\Neo4jUserProvider
         arguments: [@app.manager.user]
+
+    security.handler.loggin:
+        class: AppBundle\Security\Handler\LoginSuccessHandler
+        arguments:
+            - @security.http_utils
+            - @security.authorization_checker
+            - @app.manager.user
