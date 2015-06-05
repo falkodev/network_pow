@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class User
  *
  * @OGM\Entity(labels="User")
+ * @Assert\GroupSequence({"User", "Strict"})
  */
 class User implements UserInterface, EquatableInterface
 {
@@ -65,10 +66,11 @@ class User implements UserInterface, EquatableInterface
 
     /**
      * @OGM\Property
-     * @Assert\NotBlank(message="user.password.blank")
+     * @Assert\NotBlank(message="user.password.blank", groups={"registration"})
      * @Assert\Length(
      *      min="5",
-     *      minMessage="user.password.short"
+     *      minMessage="user.password.short",
+     *      groups={"registration"}
      * )
      */
     protected $password;
@@ -442,5 +444,13 @@ class User implements UserInterface, EquatableInterface
             return false;
         }
         return true;
+    }
+
+    /**
+     * @Assert\True(message="user.password.same_username", groups={"Strict"})
+     */
+    public function isPasswordLegal()
+    {
+        return ($this->email !== $this->password);
     }
 }

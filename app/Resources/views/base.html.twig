@@ -9,6 +9,9 @@
     <body>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'user') }}
+            <a href="{{ path('app_user_profil') }}">
+                {{ 'layout.profil'|trans({}, 'user') }}
+            </a>
             <a href="{{ path('security_logout') }}">
                 {{ 'layout.logout'|trans({}, 'user') }}
             </a>
@@ -17,6 +20,13 @@
             <a href="{{ path('app_user_register') }}">{{ 'layout.register'|trans({}, 'user') }}</a>
         {% endif %}
         <br/>
+
+        {% for key, flash in app.session.flashbag.all %}
+            <div class="alert {{ key }}">
+                {{ flash }}
+            </div>
+        {% endfor %}
+
         {% block body %}
 
         {% endblock %}

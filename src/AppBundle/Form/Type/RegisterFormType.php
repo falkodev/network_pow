@@ -15,25 +15,25 @@ class RegisterFormType extends AbstractType
     {
         $builder
             ->add('lastname', 'text', [
-                'label' => 'registerform.lastname',
+                'label' => 'form.lastname',
                 'translation_domain' => 'user'
             ])
             ->add('firstname', 'text', [
-                'label' => 'registerform.firstname',
+                'label' => 'form.firstname',
                 'translation_domain' => 'user'
             ])
             ->add('email', 'email', [
-                'label' => 'registerform.email',
+                'label' => 'form.email',
                 'translation_domain' => 'user'
             ])
             ->add('password', 'repeated', [
                 'type'            => 'password',
                 'first_options'   => [
-                    'label' => 'registerform.password',
+                    'label' => 'form.password',
                     'translation_domain' => 'user'
                 ],
                 'second_options'  => [
-                    'label' => 'registerform.password_confirmation',
+                    'label' => 'form.password_confirmation',
                     'translation_domain' => 'user'
                 ],
                 'invalid_message' => 'user.password.mismatch',
@@ -47,7 +47,8 @@ class RegisterFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\User'
+            'data_class' => 'AppBundle\Entity\User',
+            'validation_groups' => ['Default', 'registration']
         ]);
     }
 

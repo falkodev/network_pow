@@ -3,6 +3,7 @@ layout:
     logout: Déconnexion
     login: Connexion
     register: Inscription
+    profil: Profil
     logged_in_as: Connecté en tant que %username%
 
 # Security
@@ -13,9 +14,16 @@ security:
         remember_me: Se souvenir de moi
         submit: Connexion
 
-registerform:
+form:
     lastname: Nom
     firstname: Prénom
     email: E-mail
     password: Mot de passe
     password_confirmation: Confirmation
+    submit: Valider
+    address: Addresse
+    confirm_register: Votre compte a bien été crée
+    confirm_update: Votre profil a bien été mis à jour
+
+profil:
+    submit: Mettre à jour
