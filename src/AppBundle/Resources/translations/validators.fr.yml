@@ -1,6 +1,6 @@
 user:
     email:
-        already_used: L'adresse e-mail est déjà utilisée
+        already_used: Cette adresse e-mail est déjà utilisée
         blank: Entrez une adresse e-mail s'il vous plait
         invalid: L'adresse e-mail est invalide
     password:

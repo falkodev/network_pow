@@ -59,6 +59,13 @@ services:
             - @security.authorization_checker
             - @app.manager.user
 
+    # ===== VALIDATOR =====
+    neo4j.ogm.validator.unique:
+        class: AppBundle\Validator\UniqueEntityValidator
+        arguments: [@app.manager.graph]
+        tags:
+            - {name: validator.constraint_validator, alias: neo4j.validator.unique}
+
     # ===== HELPER =====
     app.helper.token_generator:
         class: AppBundle\Helper\TokenGenerator

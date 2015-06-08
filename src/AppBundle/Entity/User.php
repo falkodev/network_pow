@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\Constraints\Unique;
 use HireVoice\Neo4j\Annotation as OGM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @OGM\Entity(labels="User", repositoryClass="AppBundle\Entity\Repository\UserRepository")
  * @Assert\GroupSequence({"User", "Strict"})
+ * @Unique(fields={"email"}, message="user.email.already_used")
  */
 class User implements UserInterface, EquatableInterface
 {
