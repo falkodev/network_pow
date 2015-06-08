@@ -15,6 +15,16 @@ abstract class BaseManager
 
     protected $entityClass;
 
+    public function persist($entity)
+    {
+        $this->em->persist($entity);
+    }
+
+    public function flush()
+    {
+        $this->em->flush();
+    }
+
     /**
      * @param $entity
      */

@@ -4,9 +4,13 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\User;
 use AppBundle\Helper\CanonicalizerHelper;
+use AppBundle\Entity\Repository\UserRepository;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @property UserRepository $repository
+ */
 class UserManager extends BaseManager
 {
     private $encoder;
@@ -118,6 +122,20 @@ class UserManager extends BaseManager
         if ($saveUser) {
             $this->updateUser($user);
         }
+    }
+
+    /**
+     * @return User[]|null
+     */
+    public function getAllUnconfirmedAccount($since)
+    {
+        $now = new \DateTime();
+        // $since days ago
+        $now->sub(new \DateInterval(sprintf("P%dD", $since)));
+
+        $since = $now->format('Y-m-d h:m:s');
+
+        return $this->repository->getAllUnconfirmedAccount($since);
     }
 
     /**

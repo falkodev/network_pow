@@ -2,6 +2,7 @@
 
 namespace AppBundle\Event;
 
+use AppBundle\Entity\User;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,7 +21,7 @@ class UserEvent extends Event
         $this->request = $request;
     }
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getUser()
     {

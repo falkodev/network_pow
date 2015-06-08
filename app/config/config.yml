@@ -80,6 +80,8 @@ swiftmailer:
 parameters:
    locale: fr
 
+   user_days_to_confirm_account: 3
+
    mailer:
       from_email:
           contact@bejoe.fr: Be Joe
