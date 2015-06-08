@@ -2,6 +2,7 @@ application:
     build: docker/code
     volumes:
         - .:/var/www/bejoe
+        - vendor:/var/www/bejoe/vendor
 
 db:
     image: ahmetkizilay/docker-neo4j-auth
