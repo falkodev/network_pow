@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class User
  *
- * @OGM\Entity(labels="User")
+ * @OGM\Entity(labels="User", repositoryClass="AppBundle\Entity\Repository\UserRepository")
  * @Assert\GroupSequence({"User", "Strict"})
  */
 class User implements UserInterface, EquatableInterface
