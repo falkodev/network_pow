@@ -4,11 +4,13 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Event\UserEvent;
+use AppBundle\Security\Neo4jUserProvider;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends Controller
@@ -103,6 +105,18 @@ class UserController extends Controller
 
         $user->setConfirmationToken(null);
         $user->setStatus(User::STATUS_ENABLED);
+
+        $userManager->updateUser($user);
+
+        // Loggin user
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            if (Neo4jUserProvider::NEO4J_USER_PROXY === get_class($user)) {
+                $user = $user->getEntity();
+            }
+
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+        }
 
         $this->get('event_dispatcher')->dispatch(UserEvent::REGISTRATION_CONFIRMED, new UserEvent($user, $request));
 
