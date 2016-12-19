@@ -26,7 +26,8 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "atoum/atoum": "~2.0",
-        "atoum/stubs": "~2.0"
+        "atoum/stubs": "~2.0",
+        "m6web/coke": "~1.0"
     },
     "scripts": {
         "post-root-package-install": [

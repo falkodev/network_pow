@@ -1,0 +1,6 @@
+command=phpcs
+standard=Symfony2
+verbose=true
+
+src/
+!Tests

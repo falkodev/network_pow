@@ -29,7 +29,11 @@ clean:
 
 atoum:
 	@echo ---------------------Running atoum test suite-------------------------
-	$(fig) run --rm --no-deps php /var/www/bejoe/bin/atoum --bootstrap-file /var/www/bejoe/.bootstrap.atoum.php --configurations /var/www/bejoe/.atoum.php
+	$(fig) run --rm --no-deps php bin/atoum
+
+coke:
+	@echo ---------------------Running coke code sniffer------------------------
+	$(fig) run --rm --no-deps php bin/coke src
 
 #bower-install:
 #	$(fig) run --rm builder bower --allow-root install

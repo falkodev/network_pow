@@ -23,6 +23,7 @@ php:
         - application
     links:
         - db
+    working_dir: /var/www/bejoe
 
 nginx:
     build: docker/nginx
