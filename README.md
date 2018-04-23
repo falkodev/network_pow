@@ -1,7 +1,5 @@
-# BeJoe
+# Network Proof of work
 
-## Description du projet
-BeJoe est un réseau social mettant en avant la recommandation entre amis
  
 ## Initialisation
 
@@ -29,13 +27,3 @@ $ make <command>
 Les commandes définies dans le makefile sont : 
 - *pull* : télécharge toutes les images docker nécessaires à l'application, sans instantier les containers
  
-## Tests
-
-
-## Documentation technique détaillée
-
-Les chapitres suivants détaillent l'aspect technique du projet
-
-- Stockage des données (Neo4J)
-- Sécurité
-- Intégration continue
